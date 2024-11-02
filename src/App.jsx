@@ -8,13 +8,13 @@ export const App = () => {
   const [view, setView] = useState("overview"); // "overview" or "details"
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
-  // Function to handle view change and set the selected recipe
+  // Handle view change and set the selected recipe
   const showRecipeDetails = (recipe) => {
     setSelectedRecipe(recipe);
     setView("details");
   };
 
-  // Function to go back to the overview screen
+  // Go back to the overview screen
   const showOverview = () => {
     setSelectedRecipe(null);
     setView("overview");
