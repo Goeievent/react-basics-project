@@ -1,5 +1,6 @@
 import {
   Center,
+  Box,
   Image,
   Card,
   CardBody,
@@ -18,73 +19,86 @@ export const RecipeDetails = ({ recipe, onBackClick }) => {
   if (!recipe) return null;
 
   return (
-    <Center bgColor="blue.100" h="full" flexWrap="wrap" display="flex">
-      <Card borderRadius="xl" w="3xl" h="fit-content">
+    <Center bgColor="blue.100" h="full" flexWrap="wrap" display="flex" p={4}>
+      <Card borderRadius="xl" maxW="3xl" w="full" h="fit-content" p={[4, 6]}>
         <CardBody>
-          <Button w="fit-content" onClick={onBackClick} mb={4}>
-            ←
+          <Button
+            w="fit-content"
+            onClick={onBackClick}
+            mb={4}
+            fontSize={["sm", "md"]}
+          >
+            ← Back
           </Button>
-          <Image h="20rem" w="100%" src={recipe.image} borderRadius="xl" />
+          <Image
+            h={["15rem", "20rem"]}
+            w="100%"
+            src={recipe.image}
+            borderRadius="xl"
+            objectFit="cover"
+          />
           <Stack mt="6" spacing="3">
-            <Grid templateColumns="repeat(2, 1fr)" gap="6">
+            <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={6}>
+              {/* Left Column */}
               <GridItem>
                 <Text
                   color="gray"
                   textTransform="uppercase"
-                  fontWeight={100}
+                  fontWeight="100"
                   fontSize="xs"
                 >
                   {recipe.mealType}
                 </Text>
-                <Heading size="md">{recipe.label}</Heading>
-                <Text color="gray" fontWeight="600" paddingTop="3">
+                <Heading size="lg">{recipe.label}</Heading>
+                <Text color="gray" fontWeight="600" pt={3}>
                   Total cooking time: {recipe.totalTime} minutes
                 </Text>
-                <Text color="gray" fontWeight="600" paddingTop="3">
+                <Text color="gray" fontWeight="600" pt={3}>
                   Servings: {recipe.yield}
                 </Text>
 
-                <Text fontWeight="700" paddingTop="3">
+                <Text fontWeight="700" pt={3}>
                   Ingredients:
                 </Text>
-                <Text paddingTop="3">
+                <Box pt={3}>
                   {recipe.ingredientLines.map((ingredient, index) => (
                     <Text fontWeight="400" key={index}>
                       {ingredient}
-                      {"\n"}
                     </Text>
                   ))}
-                </Text>
-                <Image
-                  paddingTop="6"
-                  h="15rem"
-                  w="100%"
-                  src={recipe.ingredients[0].image}
-                />
+                </Box>
               </GridItem>
+
+              {/* Right Column */}
               <GridItem>
-                <Text fontWeight="500" paddingTop="3">
+                <Text fontWeight="500" pt={3}>
                   Health labels:
                 </Text>
-                <Flex paddingTop="3" gap={2} wrap="wrap" column="right">
+                <Flex pt={3} gap={2} wrap="wrap">
                   {recipe.healthLabels?.map((label, index) => (
                     <Tag key={index}>{label}</Tag>
                   ))}
                 </Flex>
-                <Text fontWeight="500" paddingTop="3">
-                  {recipe.dietLabels.length > 0 ? "Diet:" : null}
-                </Text>
-                <Flex paddingTop="3" gap={2} wrap="wrap">
+
+                {recipe.dietLabels.length > 0 && (
+                  <Text fontWeight="500" pt={3}>
+                    Diet:
+                  </Text>
+                )}
+                <Flex pt={3} gap={2} wrap="wrap">
                   {recipe.dietLabels?.map((label, index) => (
                     <Tag bgColor="green.500" key={index}>
                       {label}
                     </Tag>
                   ))}
                 </Flex>
-                <Text fontWeight="500" paddingTop="3">
-                  {recipe.cautions.length > 0 ? "Cautions:" : null}
-                </Text>
-                <Flex paddingTop="3" gap={2} wrap="wrap">
+
+                {recipe.cautions.length > 0 && (
+                  <Text fontWeight="500" pt={3}>
+                    Cautions:
+                  </Text>
+                )}
+                <Flex pt={3} gap={2} wrap="wrap">
                   {recipe.cautions?.map((caution, index) => (
                     <Tag bgColor="red.500" key={index}>
                       {caution}
@@ -93,10 +107,10 @@ export const RecipeDetails = ({ recipe, onBackClick }) => {
                 </Flex>
 
                 <NutriLabels
-                  paddingTop="3"
+                  pt={3}
                   recipe={recipe}
                   flexWrap="wrap"
-                  justify={{ base: "center", md: "normal" }}
+                  justify={{ base: "center", md: "flex-start" }}
                   mb={4}
                 />
               </GridItem>

@@ -14,7 +14,7 @@ export const NutriLabels = ({ recipe, ...props }) => {
   return (
     <>
       <Text fontWeight="700" paddingTop="3">
-        Nutrients:
+        {neededNutrients.length > 0 ? "Nutrients:" : null}
       </Text>
       <Flex gap={4} {...props}>
         {neededNutrients.map((nutrient) => (

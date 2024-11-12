@@ -11,7 +11,7 @@ export const SearchBar = ({ searchQuery, setSearchQuery }) => {
         <Input
           bgColor="white"
           type="text"
-          placeholder="Search for recipes..."
+          placeholder="Search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
